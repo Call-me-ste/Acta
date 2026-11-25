@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Una voce della lista del 4x4: il contenuto è già disegnato nella bitmap. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/voce_radice"
+    android:layout_width="match_parent"
+    android:layout_height="42dp">
+
+    <ImageView
+        android:id="@+id/voce_immagine"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:importantForAccessibility="no"
+        android:scaleType="fitXY" />
+</FrameLayout>

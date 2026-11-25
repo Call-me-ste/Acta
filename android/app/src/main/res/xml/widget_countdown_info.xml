@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Â«CountdownÂ» 2x2 fisso: la scelta dell'evento Ã¨ per widget. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_countdown_descrizione"
+    android:initialLayout="@layout/widget_countdown"
+    android:maxResizeHeight="150dp"
+    android:maxResizeWidth="150dp"
+    android:minHeight="150dp"
+    android:minResizeHeight="150dp"
+    android:minResizeWidth="150dp"
+    android:minWidth="150dp"
+    android:previewImage="@drawable/widget_preview_countdown"
+    android:previewLayout="@layout/widget_countdown"
+    android:resizeMode="none"
+    android:targetCellHeight="2"
+    android:targetCellWidth="2"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen" />

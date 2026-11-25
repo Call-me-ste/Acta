@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- «Mese + giorno» 4x4: mese, eventi del giorno scelto e To do richiudibili. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:configure="com.callmeste.planner.widget.WidgetConfigActivity"
+    android:description="@string/widget_mese_grande_descrizione"
+    android:initialLayout="@layout/widget_mese_grande"
+    android:maxResizeHeight="280dp"
+    android:maxResizeWidth="250dp"
+    android:minHeight="280dp"
+    android:minResizeHeight="280dp"
+    android:minResizeWidth="250dp"
+    android:minWidth="250dp"
+    android:previewLayout="@layout/widget_mese_grande"
+    android:resizeMode="none"
+    android:targetCellHeight="4"
+    android:targetCellWidth="4"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen"
+    android:widgetFeatures="reconfigurable" />

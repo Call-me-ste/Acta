@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Una riga del widget: la barretta «in corso», la spunta (solo per i todo),
+  l'emoji della categoria, il colore dell'elemento, il titolo e l'ora.
+
+  I due tocchi sono su due viste diverse: la **spunta** scrive in background
+  (senza aprire l'app), il resto della riga apre l'elemento. Gli eventi non hanno
+  la spunta — non si spuntano nell'app, quindi non si spuntano qui: la colonna
+  resta nascosta.
+
+  Le due barrette sono `ImageView` e **non** `View`: `android.view.View` non e'
+  nella lista delle classi che un `RemoteViews` puo' gonfiare, e il widget finiva
+  in «Errore durante il caricamento» con `Class not allowed to be inflated
+  android.view.View` (trovato il 24/09 col controllo in casa, in
+  `WidgetProviders`). Il colore lo mette il renderer, con `setBackgroundColor`.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/riga_radice"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/riga_in_corso"
+        android:layout_width="3dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="6dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/riga_spunta"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/widget_spunta_descrizione"
+        android:scaleType="centerInside"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/riga_segno"
+        android:layout_width="24dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/riga_barretta"
+        android:layout_width="3dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:id="@+id/riga_titolo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/riga_ora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:maxLines="1"
+        android:textSize="14sp" />
+</LinearLayout>

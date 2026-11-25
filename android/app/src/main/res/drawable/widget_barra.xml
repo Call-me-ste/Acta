@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- La barretta di un evento nella cella del mese: il colore lo mette il
+     renderer con setColorFilter, quindi qui il disegno è bianco. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#FFFFFFFF" />
+    <corners android:radius="1dp" />
+    <size
+        android:width="10dp"
+        android:height="2dp" />
+</shape>

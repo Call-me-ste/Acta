@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Le poche stringhe dei widget che non arrivano da Dart. I nomi e le descrizioni
+  le legge il selettore del launcher prima che l'app abbia scritto un pacchetto.
+-->
+<resources>
+    <string name="widget_oggi_nome">Planner · Agenda</string>
+    <string name="widget_oggi_descrizione">La settimana, il giorno scelto, eventi e To do</string>
+    <string name="widget_todo_nome">Planner · To do di oggi</string>
+    <string name="widget_todo_descrizione">I To do di oggi, da spuntare anche a app chiusa</string>
+    <string name="widget_mese_grande_nome">Planner · Mese + giorno</string>
+    <string name="widget_mese_grande_descrizione">Il mese con gli eventi e i To do del giorno scelto</string>
+    <string name="widget_mese_compatto_nome">Planner · Mese compatto</string>
+    <string name="widget_mese_compatto_descrizione">Solo la griglia del mese, in 2x2</string>
+    <string name="widget_eventi_nome">Planner · Eventi di oggi</string>
+    <string name="widget_eventi_descrizione">Gli eventi di oggi, con lista scorribile e To do opzionali</string>
+    <string name="widget_countdown_nome">Planner · Countdown</string>
+    <string name="widget_countdown_descrizione">Quanti giorni mancano all\'evento scelto</string>
+    <string name="widget_config_titolo">Planner widget</string>
+    <string name="widget_mese_nome">Planner · Mese</string>
+    <string name="widget_mese_descrizione">Il mese intero, solo calendario</string>
+    <string name="widget_prossimo_nome">Planner · Prossimo</string>
+    <string name="widget_prossimo_descrizione">Il prossimo evento o To do, con data e ora</string>
+
+    <string name="widget_mese_precedente">Mese precedente</string>
+    <string name="widget_mese_successivo">Mese successivo</string>
+
+    <string name="widget_titolo">Planner</string>
+    <string name="widget_aggiorna">Apri il Planner per aggiornare.</string>
+    <string name="widget_altri">+%1$d altri</string>
+    <string name="widget_conteggi">%1$s · %2$d To do</string>
+    <string name="widget_conteggi_compatti">+%1$d altri · %2$d eventi · %3$d To do</string>
+    <string name="widget_vuoto_eventi">Nessun evento per oggi.</string>
+    <string name="widget_todo_del_giorno">To do del giorno (%1$d)</string>
+    <string name="widget_mostra">Mostra</string>
+    <string name="widget_nascondi">Nascondi</string>
+    <string name="widget_todo_aperto">To do del giorno</string>
+    <string name="widget_todo_chiuso">Mostra i To do del giorno</string>
+    <string name="widget_vuoto_todo">Nessun To do per oggi.</string>
+    <string name="widget_aggiungi_evento">Aggiungi evento</string>
+    <string name="widget_nessun_evento">Nessun evento</string>
+    <string name="widget_nessun_todo">Nessun To do</string>
+    <string name="widget_conteggi_todo_fatti">%1$s · %2$d fatti</string>
+    <string name="widget_spunta_descrizione">Spunta del To do</string>
+
+    <string name="widget_mese_fuori_finestra">Apri Planner per gli altri mesi.</string>
+    <string name="widget_mese_lungo">Apri Planner per tutto il mese.</string>
+
+    <plurals name="widget_eventi">
+        <item quantity="one">%d evento</item>
+        <item quantity="other">%d eventi</item>
+    </plurals>
+    <plurals name="widget_todo">
+        <item quantity="one">%d To do</item>
+        <item quantity="other">%d To do</item>
+    </plurals>
+</resources>

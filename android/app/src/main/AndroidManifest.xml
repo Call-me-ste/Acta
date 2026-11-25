@@ -1,0 +1,246 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- I permessi delle notifiche. POST_NOTIFICATIONS lo dichiara gia' il
+         manifest del plugin, ma ripeterlo qui lo rende leggibile a chi guarda
+         QUESTA app: e' qui che si vede cosa chiede il Planner. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Import una tantum dal calendario del telefono. Leggiamo soltanto, ma
+         il plugin richiede il gruppo completo per aprire il calendario di
+         sistema: non scriviamo mai un evento nel calendario esterno. -->
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <!-- USE_EXACT_ALARM e non SCHEDULE_EXACT_ALARM: la funzione principale di
+         questa app e' un calendario, che e' il caso in cui Android concede
+         l'allarme esatto senza chiedere niente all'utente. Il secondo si puo'
+         revocare e obbliga a una schermata di concessione. Limite dichiarato:
+         se un giorno l'app andasse sul Play Store, questa autorizzazione va
+         motivata in fase di pubblicazione. -->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <!-- Serve a ripianificare gli avvisi dopo un riavvio del telefono: senza,
+         il sistema si dimentica tutto quello che era pianificato. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.any" android:required="false" />
+    <application
+        android:label="${actaLabel}"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_rules"
+        android:dataExtractionRules="@xml/data_extraction_rules">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <!-- I widget usano `planner://` come dato dell'Intent. Non è un deep
+                 link pubblico: senza questo, Flutter prova a instradarlo come
+                 route e va in errore prima che il plugin dei widget lo legga. -->
+            <meta-data
+              android:name="flutter_deeplinking_enabled"
+              android:value="false" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/jpeg"/>
+                <data android:mimeType="image/png"/>
+                <data android:mimeType="image/webp"/>
+                <data android:mimeType="application/pdf"/>
+            </intent-filter>
+        </activity>
+        <!-- I due receiver del plugin delle notifiche. Servono **tutti e due**:
+             il primo e' quello che mostra davvero l'avviso pianificato, il
+             secondo rimette in coda gli avvisi dopo un riavvio o dopo un
+             aggiornamento dell'app (MY_PACKAGE_REPLACED: e' il caso di
+             `adb install -r`, il protocollo in docs/beta.md). Il plugin ne
+             dichiara solo uno se si segue il README a meta' — e senza il primo
+             gli avvisi non compaiono. -->
+        <receiver
+            android:exported="false"
+            android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver" />
+        <receiver
+            android:exported="false"
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+        <receiver
+            android:exported="false"
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+
+        <!-- I widget della schermata home: Mese, Agenda, Todo e Prossimo. Uno
+             per riga perché ognuno ha le sue misure e la sua etichetta.
+             `exported="false"`: l'unico che può svegliarli è il sistema. -->
+        <receiver
+            android:name=".widget.OggiWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_oggi_nome">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_oggi_info" />
+        </receiver>
+        <receiver
+            android:name=".widget.TodoWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_todo_nome">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_todo_info" />
+        </receiver>
+
+        <!-- Il quarto widget: il **mese**. Un receiver suo e non un parametro
+             di `PlannerWidget`: mostra una griglia, non le righe della giornata,
+             e ha un layout e un renderer separati. -->
+        <receiver
+            android:name=".widget.MeseWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_mese_nome">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_mese_info" />
+        </receiver>
+        <receiver
+            android:name=".widget.MeseGrandeWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_mese_grande_nome">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_mese_grande_info" />
+        </receiver>
+        <receiver
+            android:name=".widget.MeseCompattoWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_mese_compatto_nome">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_mese_compatto_info" />
+        </receiver>
+        <receiver
+            android:name=".widget.EventiWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_eventi_nome">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_eventi_info" />
+        </receiver>
+        <receiver
+            android:name=".widget.CountdownWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_countdown_nome">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_countdown_info" />
+        </receiver>
+
+        <!-- I due tocchi che restano **dentro** il widget del mese: la freccia e
+             il giorno. Cambiare mese non deve aprire l'app, quindi sono
+             broadcast; il `PendingIntent` lo crea l'app, e il sistema lo esegue
+             con la sua identità — per questo `exported="false"` basta. -->
+        <receiver
+            android:name=".widget.WidgetMeseReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".widget.AgendaWidgetReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".widget.WidgetGiornoReceiver"
+            android:exported="false" />
+
+        <activity
+            android:name=".widget.WidgetConfigActivity"
+            android:exported="true"
+            android:label="@string/widget_config_titolo"
+            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar" />
+
+        <service
+            android:name=".widget.EventiWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".widget.MeseWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <!-- I due receiver del plugin dei widget, e servono **tutti e due**:
+             il primo e' la spunta fatta con l'app chiusa (passa da WorkManager,
+             quindi arriva anche se il processo non c'e'); il secondo ridisegna i
+             widget agli orari chiesti con `scheduleWidgetUpdates` — la mezzanotte
+             — e li **riarma** dopo un riavvio, dopo un aggiornamento dell'app e
+             quando il permesso degli allarmi esatti cambia. Senza il secondo, il
+             widget resta sul giorno di ieri finche' non si apre l'app. -->
+        <receiver
+            android:name="es.antonborri.home_widget.HomeWidgetBackgroundReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="es.antonborri.home_widget.action.BACKGROUND" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="es.antonborri.home_widget.HomeWidgetScheduledUpdateReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+    </application>
+    <!-- Required to query activities that can process text, see:
+         https://developer.android.com/training/package-visibility and
+         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+
+         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+    </queries>
+</manifest>

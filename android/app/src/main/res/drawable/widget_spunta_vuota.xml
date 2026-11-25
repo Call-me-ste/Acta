@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  La spunta **vuota**: un anello. Il colore vero lo mette il renderer con un
+  filtro (`setColorFilter`), quindi qui il disegno e' bianco: il bianco si tinge,
+  un colore fisso no. Vale per tutte e due le spunte.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#00000000" />
+    <stroke
+        android:width="2dp"
+        android:color="#FFFFFFFF" />
+    <size
+        android:width="22dp"
+        android:height="22dp" />
+</shape>

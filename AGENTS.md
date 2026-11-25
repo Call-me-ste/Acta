@@ -1,0 +1,10 @@
+- Vietato codegen: niente drift, isar, floor, build_runner. sqlite3 raw, SQL parametrizzato. Non ritentare drift_dev.
+- Stato con ChangeNotifier + Provider, mai setState globale.
+- const widget e ListView.builder sempre (anti-stutter).
+- Import da lib/ui/ verso ../../features/ e ../../theme/.
+- Sync = outbox + polling Google Drive AppData (no WebSocket, no server).
+- flutter build windows non funziona in sandbox Linux: builda sull'host.
+- DB = lib/core/database/database_service.dart (sqlite raw: events, todos, notes, outbox).
+- Dopo ogni modifica Flutter: flutter analyze e azzera gli errori.
+- Multi-step: piano numerato con verifica per passo, poi esegui; lascia aperto ciò che non è chiuso.
+- **Widget Android: prima di toccarli leggi `docs/widget-linee-guida.md`.** Font Inter rasterizzato, proporzioni fisse, calendario statico, un solo cerchio (giorno scelto), testi ≥ 10 sp. Nessuna eccezione.

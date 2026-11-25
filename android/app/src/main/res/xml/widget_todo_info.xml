@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Â«TodoÂ» Ã¨ un 4x4 fisso: la lista della giornata, con prioritÃ  e spunta. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_todo_descrizione"
+    android:initialLayout="@layout/widget_planner"
+    android:maxResizeHeight="300dp"
+    android:maxResizeWidth="300dp"
+    android:minHeight="300dp"
+    android:minResizeHeight="300dp"
+    android:minResizeWidth="300dp"
+    android:minWidth="300dp"
+    android:previewImage="@drawable/widget_preview_todo"
+    android:previewLayout="@layout/widget_planner"
+    android:resizeMode="none"
+    android:targetCellHeight="4"
+    android:targetCellWidth="4"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen" />

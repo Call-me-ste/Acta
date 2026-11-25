@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Â«Eventi di oggiÂ» 2x2 fisso, con lista scorribile e configurazione Todo. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:configure="com.callmeste.planner.widget.WidgetConfigActivity"
+    android:description="@string/widget_eventi_descrizione"
+    android:initialLayout="@layout/widget_eventi"
+    android:maxResizeHeight="150dp"
+    android:maxResizeWidth="150dp"
+    android:minHeight="150dp"
+    android:minResizeHeight="150dp"
+    android:minResizeWidth="150dp"
+    android:minWidth="150dp"
+    android:previewImage="@drawable/widget_preview_eventi"
+    android:previewLayout="@layout/widget_eventi"
+    android:resizeMode="none"
+    android:targetCellHeight="2"
+    android:targetCellWidth="2"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen"
+    android:widgetFeatures="reconfigurable" />
+
+
+
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  L'icona della barra di stato è chiesta **per nome** dal codice Dart
+  (`AndroidInitializationSettings('@drawable/ic_notifica')`), e il restringimento
+  delle risorse non vede i nomi scritti nel Dart: senza questa riga la toglie
+  dall'APK, e il primo avviso non trova l'icona.
+
+  Verificato il 2026-09-24: senza questo file `aapt2 dump resources` non mostrava
+  `ic_notifica` nel pacchetto. Con `tools:keep` la risorsa resta.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/ic_notifica,@drawable/ic_notifica_todo" />

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Todo compatto: spunta, barra colore e titolo. Niente orario. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/riga_radice"
+    android:layout_width="match_parent"
+    android:layout_height="34dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/riga_spunta"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/widget_spunta_descrizione"
+        android:scaleType="centerInside" />
+
+    <ImageView
+        android:id="@+id/riga_barretta"
+        android:layout_width="3dp"
+        android:layout_height="14dp"
+        android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:id="@+id/riga_titolo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif"
+        android:maxLines="1"
+        android:textSize="14sp" />
+</LinearLayout>

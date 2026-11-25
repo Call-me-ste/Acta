@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Il colore di sfondo dell'icona adattiva: campionato dalla sorgente da
+     tools/icona.py, non scelto a mano. -->
+<resources>
+    <color name="icona_sfondo">#070d1f</color>
+</resources>

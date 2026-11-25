@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Â«Mese compattoÂ» 2x2: solo la griglia. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_mese_compatto_descrizione"
+    android:initialLayout="@layout/widget_mese_compatto"
+    android:maxResizeHeight="150dp"
+    android:maxResizeWidth="150dp"
+    android:minHeight="150dp"
+    android:minResizeHeight="150dp"
+    android:minResizeWidth="150dp"
+    android:minWidth="150dp"
+    android:previewImage="@drawable/widget_preview_mese_compatto"
+    android:previewLayout="@layout/widget_mese_compatto"
+    android:resizeMode="none"
+    android:targetCellHeight="2"
+    android:targetCellWidth="2"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen" />
+
+
+
+

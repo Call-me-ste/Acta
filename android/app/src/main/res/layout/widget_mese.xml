@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  «Mese» 4x2 — allegato 1: a sinistra il mese, il giorno della settimana e il
+  numero hero, centrati nel loro spazio; a destra il mese compatto. Niente
+  frecce e niente anno: il mese si cambia dall'app o dal 4x4.
+  Tutto il testo è un'immagine disegnata con Inter (WidgetText).
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mese_radice"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.40"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/mese_eyebrow"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:importantForAccessibility="no"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/mese_giorno_nome"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginTop="1dp"
+            android:importantForAccessibility="no"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/mese_giorno_numero"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:importantForAccessibility="no"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.60"
+        android:orientation="vertical"
+        android:paddingStart="8dp">
+
+        <ImageView
+            android:id="@+id/mese_settimana_immagine"
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:importantForAccessibility="no"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:id="@+id/mese_griglia"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/mese_nota"
+            android:layout_width="match_parent"
+            android:layout_height="14dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/widget_mese_fuori_finestra"
+            android:textSize="9sp"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

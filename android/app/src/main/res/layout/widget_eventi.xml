@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  «Eventi di oggi» 2x2: testata fissa, lista **scorribile** con una collection
+  Android vera. Quando non c'è niente, la stessa card mostra «+ Aggiungi evento».
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/eventi_radice"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/eventi_etichetta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:text="Oggi"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/eventi_conteggi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="3 eventi"
+        android:textSize="9sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="3dp">
+
+        <ListView
+            android:id="@+id/eventi_lista"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:scrollbars="vertical" />
+
+        <LinearLayout
+            android:id="@+id/eventi_vuoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/eventi_piu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="+"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/eventi_vuoto_testo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="Aggiungi evento"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

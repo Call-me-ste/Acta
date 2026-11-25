@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Cosa Google copia dal telefono (Android 11 e precedenti; da Android 12 in poi
+  valgono le regole in `data_extraction_rules.xml`).
+
+  Di proposito qui c'è **solo** l'esclusione, non un elenco di inclusioni: senza
+  «include» si copia tutto quello che l'app ha, e l'unica cosa da togliere sono i
+  due file di appoggio del WAL.
+
+  Perché il WAL si esclude: le scritture recenti stanno in `planner.db-wal`
+  finché un checkpoint non le porta dentro il database principale. Copiare il WAL
+  insieme al database vuol dire copiare **due stati diversi** dello stesso
+  database; copiarlo senza il database principale lascia fuori le ultime
+  modifiche. L'app fa il checkpoint quando va in secondo piano, quindi il file
+  principale è già aggiornato: il WAL non serve.
+
+  Le copie di sicurezza interne (`files/backup/`) si copiano: sono dati nostri e
+  sono già verificate.
+-->
+<full-backup-content>
+    <exclude domain="sharedpref" path="FlutterSecureStorage.xml" />
+    <exclude domain="file" path="app_flutter/planner.db-wal" />
+    <exclude domain="file" path="app_flutter/planner.db-shm" />
+</full-backup-content>

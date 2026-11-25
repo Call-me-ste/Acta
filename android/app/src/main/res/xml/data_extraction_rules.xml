@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Le regole di estrazione dei dati da Android 12 (API 31) in poi: valgono sia per
+  il backup su cloud sia per il trasferimento fra telefoni.
+
+  Stesse scelte di `backup_rules.xml`, con il perché: solo esclusioni (si copia
+  tutto quello che l'app ha) e fuori i due file di appoggio del WAL, che insieme
+  al database principale sarebbero **due stati diversi** dello stesso database.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="FlutterSecureStorage.xml" />
+        <exclude domain="file" path="app_flutter/planner.db-wal" />
+        <exclude domain="file" path="app_flutter/planner.db-shm" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="sharedpref" path="FlutterSecureStorage.xml" />
+        <exclude domain="file" path="app_flutter/planner.db-wal" />
+        <exclude domain="file" path="app_flutter/planner.db-shm" />
+    </device-transfer>
+</data-extraction-rules>

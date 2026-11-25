@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- «Agenda» 4x4: striscia della settimana, giorno scelto, eventi e To do. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:configure="com.callmeste.planner.widget.WidgetConfigActivity"
+    android:description="@string/widget_oggi_descrizione"
+    android:initialLayout="@layout/widget_agenda"
+    android:maxResizeHeight="300dp"
+    android:maxResizeWidth="300dp"
+    android:minHeight="280dp"
+    android:minResizeHeight="280dp"
+    android:minResizeWidth="250dp"
+    android:minWidth="250dp"
+    android:previewLayout="@layout/widget_agenda"
+    android:resizeMode="none"
+    android:targetCellHeight="4"
+    android:targetCellWidth="4"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen"
+    android:widgetFeatures="reconfigurable" />

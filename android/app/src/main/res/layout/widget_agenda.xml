@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  «Agenda» 4x4: testata, striscia della settimana, eventi e To do come righe
+  statiche; una sola barra To do in fondo.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/agenda_radice"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/agenda_titolo"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_weight="1"
+            android:importantForAccessibility="no"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/agenda_indietro"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:contentDescription="@string/widget_mese_precedente"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/agenda_avanti"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:contentDescription="@string/widget_mese_successivo"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/agenda_nuovo"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="2dp"
+            android:contentDescription="@string/widget_aggiungi_evento"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/agenda_striscia"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="2dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:id="@+id/agenda_divisore"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:importantForAccessibility="no" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/agenda_eventi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="36dp" />
+
+        <LinearLayout
+            android:id="@+id/agenda_todo_righe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="36dp"
+            android:orientation="vertical"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/agenda_todo_barra"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_gravity="bottom"
+            android:importantForAccessibility="no"
+            android:scaleType="fitXY"
+            android:visibility="gone" />
+    </FrameLayout>
+</LinearLayout>
